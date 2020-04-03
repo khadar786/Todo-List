@@ -1,3 +1,20 @@
 todoApp.controller('todoCtrl',function($scope,$rootScope,$routeParams,$location,$http,$location,$window){
-	console.log('r');
+			$scope.authenticated=$rootScope.authenticated=true;
+			$scope.user_id=$rootScope.user_id;
+            $scope.first_name=$rootScope.first_name;
+            $scope.last_name=$rootScope.last_name;
+            $scope.user_name=$scope.first_name+' '+$rootScope.last_name;
+            $scope.email=$rootScope.email;
+            $scope.user_level=$rootScope.user_level;
+            $scope.user_status=$rootScope.user_status;
+	//Logout
+	$scope.logout=function(){
+		localStorage.removeItem("user_id");
+		localStorage.removeItem("first_name");
+		localStorage.removeItem("last_name");
+		localStorage.removeItem("email");
+		localStorage.removeItem("user_level");
+		localStorage.removeItem("user_status");
+		$location.path("/login");
+	}
 });
