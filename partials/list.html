@@ -17,19 +17,34 @@
                             <!-- <div class="panel-heading">User Information</div> -->
                             <div class="panel-body">
                                 <div class="row">
-                                    <div class="col-md-12" style="margin-bottom: 10px;">
-                                        <div class="col-md-6" style="float: left;">
-                                            <div class="input-group">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <input type="text" name="user_search" ng-model="user_search" class="form-control" placeholder="Search for..."/>
+                                            </div>
+                                            <!-- <div class="input-group">
                                                 <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
                                                 <div class="input-group-append">
                                                     <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
                                                 </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <select class="form-control" id="created_by" name="created_by" ng-model="created_by" ng-change="getUserTodoList();">
+                                                    <option value="">Select User</option>
+                                                    <option ng-repeat="(key, user) in users" value="{{user.user_id}}">{{user.first_name}}</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 pull-right">
-                                            <button type="button" class="btn btn-sm btn-primary">Create New</button>
+                                        <div class="col-md-1">
+                                            <button type="button" class="btn btn-primary" ng-click="getUserTodoList();">Search</button>
                                         </div>
-                                    </div>
+                                        <div class="col-md-1">
+                                            <button type="button" class="btn btn-warning" ng-click="clearSearch();">Clear</button>
+                                        </div>
+                                        <div class="col-md-3 pull-right">
+                                            <button type="button" class="btn btn-success" ng-click="addTask();">Add Task</button>
+                                        </div>
                                 </div>
                             </div>
                             <!-- Table -->
@@ -40,11 +55,11 @@
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Created By</th>
-                                        <th>Created Date</th>
+                                        <th>Created On</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <!-- <tbody>
                                     <tr>
                                         <td>1</td>
                                         <td>John</td>
@@ -69,12 +84,25 @@
                                         <td>2020-04-03</td>
                                         <td></td>
                                     </tr>
+                                </tbody> -->
+                                <tbody>
+                                    <tr dir-paginate="(key,task) in todolist|itemsPerPage:5" total-items="totalItems" current-page="pagination.current">
+                                        <td>{{(key+start_from+1)}}</td>
+                                        <td>{{task.title}}</td>
+                                        <td>{{task.description}}</td>
+                                        <td>{{task.first_name}}</td>
+                                        <td>{{task.created_on}}</td>
+                                        <td ng-if="user_id!=task.user_id"><a ng-href="#!/write-comment/{{task.todo_id}}">Write Comment</a></td>
+                                        <td ng-if="user_id==task.user_id"><a class="btn btn-default">--</a></td>
+                                    </tr>
                                 </tbody> 
                             </table>
+                            <dir-pagination-controls boundary-links="true" class="pull-right" on-page-change="pageChanged(newPageNumber)" template-url="partials/templates/dirPagination.html" ></dir-pagination-controls>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     </div>
-</div>  
+</div>
+<ng-include src="'partials/includes/popups.html'"></ng-include>

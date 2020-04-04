@@ -5,9 +5,11 @@ todoApp.controller('authCtrl',function ($scope,$rootScope,$routeParams,$location
 	$scope.loader='<i class="fa fa-circle-o-notch fa-spin" style="font-size:22px"></i>';
 	$scope.loginbtn=false;
 	$scope.auth_service='services/api.php';
+	$scope.login_submitted=false;
 	//Login form
 	$scope.submitLoginForm=function(){
 		$scope.loginbtn=true;
+		$scope.login_submitted=true;
 		if($scope.LoginForm.$valid){
 			 $scope.loginuser.action='user_auth';
 			 var params=$.param($scope.loginuser);
@@ -35,6 +37,8 @@ todoApp.controller('authCtrl',function ($scope,$rootScope,$routeParams,$location
 		          //$scope.status = response.status;
 		          $scope.loginbtn=false;
 		      });
+		}else{
+			$scope.loginbtn=false;
 		}
 		
 	}

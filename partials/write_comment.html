@@ -1,0 +1,57 @@
+<div id="layoutSidenav_nav" ng-include="'partials/includes/sidenav_top.html'"></div>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_nav" ng-include="'partials/includes/sidenav.html'"></div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid">
+                <h1 class="mt-4">{{task.title}}</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="#!/to-do-list/">To-do List</a></li>
+                    <li class="breadcrumb-item active">{{task.title}}</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form id="AddTaskForm" name="AddTaskForm" ng-submit="submitAddTaskForm(AddTaskForm.$valid)" novalidate="novalidate">
+                            <div class="form-group" ng-class="{'has-error': AddTaskForm.title.$invalid && (AddTaskForm.title.$dirty || addtask_submitted)}">
+                                <input type="text" class="form-control" placeholder="Title" name="title" ng-model="addtask.title" ng-required="true" autocomplete="off">
+                                <p class="help-block" ng-show="AddTaskForm.title.$error.required && (AddTaskForm.title.$dirty || addtask_submitted)">The title is required</p>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error':AddTaskForm.description.$invalid && (AddTaskForm.description.$dirty || addtask_submitted)}">
+                                <textarea class="form-control" rows="4" cols="10" name="description" ng-model="addtask.description" ng-required="true" placeholder="Description"></textarea>
+                                <p class="help-block" ng-show="AddTaskForm.description.$error.required && (AddTaskForm.description.$dirty || addtask_submitted)">The description is required</p>
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <button type="submit" class="btn btn-lg btn-primary">Submit Comment <span id="login_loader"></span></button>
+                            </div>
+                            <p id="addmsg">{{addmsg}}</p>
+                        </form>
+                        <hr/>
+                        <ul>
+                            <li class="ui-state-default" ng-repeat="(key, comment) in comments">
+                                <strong class="pull-left primary-font">{{comment.first_name}}</strong>
+                                <small class="pull-right text-muted">
+                                <span class="glyphicon glyphicon-time"></span>{{comment.created_on}}</small>
+                                </br>
+                                <p>{{comment.title}}</p>
+                                {{comment.comment}}
+                                </br> 
+                            </li> 
+                            <!-- <li class="ui-state-default">
+                            <strong class="pull-left primary-font">James</strong>
+                            <small class="pull-right text-muted">
+                               <span class="glyphicon glyphicon-time"></span>7 mins ago</small>
+                            </br>    
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </br></li>                            
+                            <li class="ui-state-default">
+                            <strong class="pull-left primary-font">Taylor</strong>
+                            <small class="pull-right text-muted">
+                               <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                            </br>
+                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div> 

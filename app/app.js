@@ -1,4 +1,4 @@
-var todoApp=angular.module('todoApp',['ngRoute','ngAnimate', 'toaster','ui.bootstrap']);
+var todoApp=angular.module('todoApp',['ngSanitize','ngRoute','ngAnimate', 'toaster','ui.bootstrap','angularUtils.directives.dirPagination']);
 todoApp.config(['$routeProvider',function ($routeProvider) {
 	$routeProvider.
 			when('/', {
@@ -17,10 +17,11 @@ todoApp.config(['$routeProvider',function ($routeProvider) {
 				title: 'Profile',
 				templateUrl: 'partials/profile.html',
 				controller: 'todoCtrl'
-			})/*.when('/logout', {
-				title: 'logout',
-				controller: 'authCtrl'
-			})*/.otherwise({
+			}).when('/write-comment/:todo_id', {
+				title: 'Write Comment',
+				templateUrl: 'partials/write_comment.html',
+				controller: 'commentCtrl'
+			}).otherwise({
                 redirectTo: '/login'
             });
 }]).run(function($rootScope, $location){
@@ -40,14 +41,20 @@ todoApp.config(['$routeProvider',function ($routeProvider) {
 			//array= seach.split('/');
 			var array=new Array();
 			array=seach.split('/');
-			var default_url='to-do-list';
+			var default_url='/to-do-list';
 			if(array[1]==''){
-				default_url='to-do-list';
+				default_url='/to-do-list';
 			}else{
-				default_url=array[1];
+				if(array[1]!='login'){
+					console.log($location.path());
+					default_url=seach;
+				}else{
+					default_url='/to-do-list';
+				}
+				
 			}
 
-			$location.path("/"+default_url);
+			$location.path(default_url);
 		}else{
 			$location.path("/login");
 		}

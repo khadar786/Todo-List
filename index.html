@@ -15,6 +15,9 @@
 		.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
 		    color: #a94442;
 		}
+		[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+		    display: none !important;
+		}
     </style>
 </head>
 <body class="sb-nav-fixed">
@@ -33,5 +36,8 @@
 <script src="app/app.js"></script>
 <script src="app/authCtrl.js"></script>
 <script src="app/todoCtrl.js"></script>
+<script src="app/commentCtrl.js"></script>
+<!-- <script src="js/directives.js"></script> -->
+<script src="js/dirPagination.js"></script>
 </body>
 </html>

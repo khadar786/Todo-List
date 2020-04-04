@@ -1,0 +1,68 @@
+<!--Add Task-->
+<div class="modal fade" id="add_task" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="AddTaskForm" name="AddTaskForm" ng-submit="submitAddTaskForm(AddTaskForm.$valid)" novalidate="novalidate">
+            <div class="form-group" ng-class="{'has-error': AddTaskForm.title.$invalid && (AddTaskForm.title.$dirty || addtask_submitted)}">
+                <input type="text" class="form-control" placeholder="Title" name="title" ng-model="addtask.title" ng-required="true" autocomplete="off">
+                <p class="help-block" ng-show="AddTaskForm.title.$error.required && (AddTaskForm.title.$dirty || addtask_submitted)">The title is required</p>
+            </div>
+            <div class="form-group" ng-class="{'has-error':AddTaskForm.description.$invalid && (AddTaskForm.description.$dirty || addtask_submitted)}">
+                <textarea class="form-control" rows="4" cols="10" name="description" ng-model="addtask.description" ng-required="true" placeholder="Description"></textarea>
+                <p class="help-block" ng-show="AddTaskForm.description.$error.required && (AddTaskForm.description.$dirty || addtask_submitted)">The description is required</p>
+            </div>
+            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+            <button type="submit" class="btn btn-lg btn-primary">Add Task <span id="login_loader"></span></button>
+            </div>
+            <p id="addmsg">{{addmsg}}</p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Add Task</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!--Add Task-->  
+<!--Edit Task-->
+<div class="modal fade" id="edit_task" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="EditTaskForm" name="EditTaskForm" ng-submit="submitUpdateTaskForm(EditTaskForm.$valid)" novalidate="novalidate">
+            <div class="form-group" ng-class="{'has-error': EditTaskForm.title.$invalid && (EditTaskForm.title.$dirty || addtask_submitted)}">
+                <input type="text" class="form-control" placeholder="Title" name="title" ng-model="edittask.title" ng-required="true" autocomplete="off">
+                <p class="help-block" ng-show="EditTaskForm.title.$error.required && (EditTaskForm.title.$dirty || addtask_submitted)">The title is required</p>
+            </div>
+            <div class="form-group" ng-class="{'has-error':EditTaskForm.description.$invalid && (EditTaskForm.description.$dirty || addtask_submitted)}">
+                <textarea class="form-control" rows="4" cols="10" name="description" ng-model="edittask.description" ng-required="true" placeholder="Description"></textarea>
+                <p class="help-block" ng-show="EditTaskForm.description.$error.required && (EditTaskForm.description.$dirty || addtask_submitted)">The description is required</p>
+            </div>
+            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+            <button type="submit" class="btn btn-lg btn-primary">Add Task <span id="login_loader"></span></button>
+            </div>
+            <p id="addmsg">{{addmsg}}</p>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Edit Task-->  
